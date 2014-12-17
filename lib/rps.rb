@@ -22,7 +22,7 @@ module Rps
         );
       CREATE TABLE IF NOT EXISTS api_keys (
         id          SERIAL PRIMARY KEY,
-        api_key     VARCHAR,
+        api_key     VARCHAR UNIQUE,
         user_id     INTEGER REFERENCES users(id) ON DELETE CASCADE
         );
       CREATE TABLE IF NOT EXISTS matches (
@@ -59,5 +59,6 @@ module Rps
       DROP TABLE api_keys CASCADE;
     ]
   end
+end
   
         
