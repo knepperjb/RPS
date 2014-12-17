@@ -44,8 +44,7 @@ module Rps
         chal_choice     VARCHAR,
         cont_choice     VARCHAR,
         winner          VARCHAR,
-        round           INTEGER,
-        game_id         INTEGER
+        match_id         INTEGER
         );
       ]
   end
