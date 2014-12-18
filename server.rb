@@ -70,8 +70,6 @@ class Rps::Server < Sinatra::Application
         { errors: errors }.to_json
       end
     
-    end
-    
   end
 
 
