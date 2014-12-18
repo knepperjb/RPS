@@ -1,6 +1,12 @@
 module Rps
   class MatchRepo
 
+    def self.create_match(db, challenger_id, contender_id)
+      sql = %q[INSERT INTO matches (challenger_id, contender_id) VALUES ($1, $2) RETURNING *;]
+      result = db.exec(sql, [challenger_id, contender_id])
+      result.entries.first
+    end
+
     def self.all_matches(db)
       sql = %q[SELECT * FROM matches;]
       result = db.exec(sql)
