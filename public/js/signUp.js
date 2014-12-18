@@ -2,7 +2,7 @@ function ajaxSignup () {
   $("#signupBtn").click(function() {
     console.log("in signup")
     $.post(
-      "/signup",
+      "http://10.10.10.10:4567/signup",
       {
         username: $("#usernameSignup").val(), 
         password: $("#passwordSignup").val()

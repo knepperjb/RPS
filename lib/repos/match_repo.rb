@@ -6,7 +6,7 @@ module Rps
       result = db.exec(sql, [challenger_id, contender_id])
       result.entries.first
     end
-
+  
     def self.all_matches(db)
       sql = %q[SELECT * FROM matches;]
       result = db.exec(sql)

@@ -12,7 +12,7 @@ require_relative 'lib/repos/users_repo.rb'
 require_relative 'lib/repos/bouts_repo.rb'
 
 
-class Rps::Server < Sinatra::Application
+#class Rps::Server < Sinatra::Application
 
   configure do
       enable :sessions
@@ -20,7 +20,7 @@ class Rps::Server < Sinatra::Application
   end
 
   def db
-    Rps.create_db_connection('rps_dev')  
+    Rps.create_db_connection('rps_test')  # Will be rps_dev when we go live  
   end
 
   # run this before every endpoint to get the current user
@@ -55,7 +55,7 @@ class Rps::Server < Sinatra::Application
         errors << 'blank_username'
       end
      
-      if Rps::UsersRepo.find_by_name(db, params[:username])
+      if Rps::UsersRepo.find_user_by_id(db, params[:username])
         errors << 'username_taken'
       end
 
@@ -70,15 +70,13 @@ class Rps::Server < Sinatra::Application
         { errors: errors }.to_json
       end
     
-    end
-    
   end
 
 
   post '/signin' do
   # Access USERS table confirm user
   # Access API_KEYS table to insert API Token
-  user = Rps::UsersRepo.find_by_user_name(db, params[:username])
+  user = Rps::UsersRepo.find_by_user_id(db, params[:username])
 
     if user && user['password'] == params[:password]
       token = Rps::ApiKeyRepo.add_api_key_to_table(db, user['id'])
@@ -94,7 +92,7 @@ class Rps::Server < Sinatra::Application
   # Create a match between the challenger (challenger_id) and contender (contender_id)
   end
 
-  post '/match/:user_id/choice' do
+  post '/match/:user_id' do
   # Access BOUTS table
   # 
 
@@ -106,8 +104,8 @@ class Rps::Server < Sinatra::Application
 
   get '/users' do
   # Access USERS table to select (drop down box) the contender
+    users = Rps::UsersRepo.all(db)  # returns an array of users 
   end
-
 
 
   delete '/signout' do
@@ -117,6 +115,6 @@ class Rps::Server < Sinatra::Application
     '{}'
   end
 
-end
+#end
 
 

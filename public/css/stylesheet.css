@@ -1,0 +1,15 @@
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+img {
+	width: 200px;
+	height: 200px;
+}
+
+.choicediv {
+	max-width: 33%;
+	float: left;
+	height: 300px;
+}
