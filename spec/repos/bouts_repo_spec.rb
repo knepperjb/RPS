@@ -16,7 +16,7 @@ describe Rps::BoutsRepo do
 
   it "saves a bout to the database" do
     expect(bout_count(db)).to eq(0)
-    result = Rps::BoutsRepo.new(db, {:chal_choice => 'pizza', :cont_choice => 'cutter', :match_id => 4})
+    result = Rps::BoutsRepo.new(db, {:chal_choice => 'pizza', :cont_choice => 'cutter', :match_id => 9999})
     expect(result['chal_choice']).to eq('pizza')
     expect(result['cont_choice']).to eq('cutter')
     expect(result['id']).to_not be_nil
@@ -46,7 +46,7 @@ describe Rps::BoutsRepo do
 
   it "finds a bout by match id" do
     expect(bout_count(db)).to eq(0)
-    result = Rps::BoutsRepo.new(db, {:chal_choice => 'cutter', :cont_choice => 'pizza', :match_id => '2'})
+    result = Rps::BoutsRepo.new(db, {:chal_choice => 'cutter', :cont_choice => 'pizza', :match_id => 9999999})
     expect(bout_count(db)).to eq(1)
     newresult = Rps::BoutsRepo.find_by_match_id(db, result['match_id'])
     expect(newresult['chal_choice']).to eq('cutter')
