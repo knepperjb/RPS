@@ -1,4 +1,4 @@
-require_relative '../lib/rps'
+require 'spec_helper'
 
 describe Rps::ApiKeyRepo do
   
