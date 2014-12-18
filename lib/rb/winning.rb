@@ -39,8 +39,12 @@ module Rps
   #   returns a match winner if match is completed 
 #     retunrs nil if match is not complete
     def self.is_match_complete(db, match_id)
-      bouts = BoutsRepo.find_by_match_id(db, match_id)
-      
+      winners = BoutsRepo.winner_count(db, match_id)
+      winners.each do |winner|
+        if winner['count'] = 3 && winner['winner'] != nil 
+          return winner['winner']
+        end
+      end
     end
       
     
