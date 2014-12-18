@@ -55,7 +55,7 @@ require_relative 'lib/repos/bouts_repo.rb'
         errors << 'blank_username'
       end
      
-      if Rps::UsersRepo.find_by_name(db, params[:username])
+      if Rps::UsersRepo.find_user_by_name(db, params[:username])
         errors << 'username_taken'
       end
 
@@ -92,7 +92,7 @@ require_relative 'lib/repos/bouts_repo.rb'
   # Create a match between the challenger (challenger_id) and contender (contender_id)
   end
 
-  post '/match/:user_id/choice' do
+  post '/match/:user_id' do
   # Access BOUTS table
   # 
 
@@ -106,7 +106,6 @@ require_relative 'lib/repos/bouts_repo.rb'
   # Access USERS table to select (drop down box) the contender
     users = Rps::UsersRepo.all(db)  # returns an array of users 
   end
-
 
 
   delete '/signout' do
