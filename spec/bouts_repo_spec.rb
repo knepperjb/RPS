@@ -1,5 +1,5 @@
 
-require_relative '../lib/rps.rb'
+require 'spec_helper'
 
 
 describe Rps::BoutsRepo do
