@@ -2,7 +2,89 @@
 <html>
 <head>
 	<title>Pizza!</title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+  	<script type="text/javascript" src="js/handlebars-v2.0.0.js"></script>
+  	<audio src="Pizza_wars.m4a" autoplay></audio>
 </head>
 <body>
+	<div class="container">
+		<div class="row">
+			<div class="small-6 large-2 columns" id="left-bar">
+				<div id="#signupdiv">
+					<h4>Sign Up</h4>
+				  	<label>User Name:</label>
+			      	<input type="text" placeholder="user name here" id="usernameSignup" />
+			      	<label>Password:</label>
+			      	<input type="password" placeholder="password here" id="passwordSignup">
+			      	<input type="button" value="Sign Up" id="signupBtn">
+				</div>
+
+				<hr>
+
+				<div>
+					<h4>Sign In</h4>
+				  	<label>User Name:</label>
+			      	<input type="text" placeholder="user name here" id="usernameSignin" />
+			      	<label>Password:</label>
+			      	<input type="password" placeholder="password here" id="passwordSignin">
+			      	<input type="button" value="Sign In" id="signinBtn">
+				</div>
+					
+				<hr>
+
+				<h4>Users</h4>
+
+				<div style="overflow:scroll; height: 100px">
+					<ul>
+						<li>hi</li>
+						<li>ho</li>
+						<li>hee</li>
+						<li>hu</li>
+						<li>hum</li>
+						<li>hooray</li>
+						<!-- These will be appended with handlebars -->
+					</ul>
+				</div>
+			</div>
+
+			<div class="small-12 large-8 columns" id="middle">
+				<h1 style="margin-left: auto; margin-right: auto; display: block; width: 500px"><marquee>Pizza Wars!!1</marquee></h1>
+				<div id="choices-container">
+					<form id="choiceform">
+						<div class = "choicediv" id="pizzadiv">
+							<img src="http://slice.seriouseats.com/images/20110426-emilios-plain-slice-pizza.jpg">
+							<input type="radio" name="radio" value="pizza">
+						</div>
+						<div class = "choicediv" id="pandiv">
+							<img src="http://www.homewetbar.com/images/prod/w-pizza-pan-cast-iron219006.jpg">
+							<input type="radio" name="radio" value="pan">
+						</div>
+						<div class = "choicediv" id="cutterdiv">
+							<img src="http://www.pizzatools.com/content/PizzaTools/images/catimages/zoom/wheelcutter.jpg">
+							<input type="radio" name="radio" value="cutter">
+						</div>
+						<center><button type="submit">Submit</button></center>
+					</form>
+				</div>
+			</div>
+
+			<div class="small-6 large-2 columns" id="right-bar">
+			<h4> My Matches </h4>
+				<div id="currentmatches" style="overflow:scroll; height: 500px">
+					<ul>
+						<li>hi</li>
+						<li>hi</li>
+						<li>ho</li>
+						<li>hee</li>
+						<li>hu</li>
+						<li>hum</li>
+						<li>hooray</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
