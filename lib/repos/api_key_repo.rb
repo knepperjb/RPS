@@ -16,5 +16,14 @@ module Rps
     result.entries.first
   end
   
+  def self.find_key_by_user_id(db, user_id)
+    sql = %q[
+      SELECT api_key
+      FROM api_keys
+      WHERE user_id = $1
+    ]
+    db.exec(sql, [user_id]).entries.first
+  end
+  
   end
 end
