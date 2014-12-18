@@ -24,6 +24,16 @@ module Rps
     ]
     db.exec(sql, [user_id]).entries.first
   end
+
+  def self.sign_out(db, user_id)
+      sql = %q[
+        DELETE FROM api_keys
+        WHERE user_id = $1
+        ]
+
+      result = db.exec(sql, [user_id])
+      result.entries.first
+    end
   
   end
 end
