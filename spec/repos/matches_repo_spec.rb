@@ -1,6 +1,4 @@
-require_relative '../lib/repos/match_repo.rb'
-require_relative '../lib/rps.rb'
-# require 'spec_helper'
+require 'spec_helper'
 
 describe Rps::MatchRepo do 
   
@@ -17,6 +15,14 @@ describe Rps::MatchRepo do
     db.exec("INSERT INTO users (username, password) VALUES ('Daisy', 'pool')")
   end
 
+  it 'creates a match' do
+    user1 = Rps::UsersRepo.save(db, { "username" => "Alice", "password" => "pass123" })
+    user2 = Rps::UsersRepo.save(db, { "username" => "Jamie", "password" => "pass123" })
+    match = Rps::MatchRepo.create_match(db, user1['id'], user2['id'])
+    expect(match['challenger_id']).to eq(user1['id'])
+    expect(match['contender_id']).to eq(user2['id'])
+  end
+  
   it "returns all matches" do
     
     db.exec("INSERT INTO matches (challenger_id, contender_id) VALUES ($1, $2)", [1, 2])

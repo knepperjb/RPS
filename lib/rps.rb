@@ -5,6 +5,7 @@ require_relative "repos/api_key_repo.rb"
 require_relative "repos/match_repo.rb"
 require_relative "repos/users_repo.rb"
 require_relative "repos/bouts_repo.rb"
+require_relative 'rb/winning.rb'
 
 module Rps
 
@@ -43,7 +44,7 @@ module Rps
         id              SERIAL PRIMARY KEY,
         chal_choice     VARCHAR,
         cont_choice     VARCHAR,
-        winner          VARCHAR,
+        winner          INTEGER REFERENCES users(id) ON DELETE CASCADE,
         match_id        INTEGER REFERENCES matches(id) ON DELETE CASCADE
         );
       ]
