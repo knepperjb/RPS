@@ -40,7 +40,7 @@ module Rps
         winner          INTEGER REFERENCES users(id) ON DELETE CASCADE
         );
       CREATE TABLE IF NOT EXISTS bouts (
-        id              INTEGER SERIAL PRIMARY KEY,
+        id              SERIAL PRIMARY KEY,
         chal_choice     VARCHAR,
         cont_choice     VARCHAR,
         winner          VARCHAR,
