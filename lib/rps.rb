@@ -44,7 +44,7 @@ module Rps
         id              SERIAL PRIMARY KEY,
         chal_choice     VARCHAR,
         cont_choice     VARCHAR,
-        winner          VARCHAR,
+        winner          INTEGER REFERENCES users(id) ON DELETE CASCADE,
         match_id        INTEGER REFERENCES matches(id) ON DELETE CASCADE
         );
       ]
