@@ -9,9 +9,10 @@ module Rps
     end
 
     # Find user's (challenger/contender) USERNAME and PASSWORD by their associated ID
-    def self.find_user_by_name(db, user_id)
+    def self.find_user_by_id(db, user_id)
       db.exec("SELECT username FROM users WHERE id = $1", [user_id])[0]
     end
+
 
     # If user (challenger/contender) has an associated ID, they can modify their USERNAME & PASSWORD
     # Else, USERNAME and PASSWORD must be entered if (challenger/contender) is signing up for the first time (ID will be generated)
