@@ -1,5 +1,6 @@
 
 module Rps
+
   class UsersRepo
 
     # Results returned in array (for RSpec test purposes)
@@ -8,8 +9,8 @@ module Rps
     end
 
     # Find user's (challenger/contender) USERNAME and PASSWORD by their associated ID
-    def self.find(db, user_id)
-      db.exec("SELECT username, password FROM users WHERE id = $1", [user_id])[0]
+    def self.find_user_by_name(db, user_id)
+      db.exec("SELECT username FROM users WHERE id = $1", [user_id])[0]
     end
 
     # If user (challenger/contender) has an associated ID, they can modify their USERNAME & PASSWORD
@@ -28,4 +29,5 @@ module Rps
     end
 
   end
+  
 end
