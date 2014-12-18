@@ -29,7 +29,19 @@ module Rps
     def self.find_by_match_id(db, match_id)
       sql = %q[SELECT * FROM bouts WHERE match_id = $1]
       result = db.exec(sql, [match_id])
-      result.entries.first
+      result.entries
+    end
+    
+    def self.winner_count(db, match_id)
+      sql = %q[
+      SELECT DISTINCT 
+        winner, 
+        count(*) 
+      FROM bouts 
+      WHERE match_id = $1 
+      GROUP BY winner
+      ]
+      db.exec(sql, [match_id]).entries
     end
   end
 end
