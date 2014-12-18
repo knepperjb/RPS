@@ -30,7 +30,7 @@ describe Rps::BoutsRepo do
     status = Rps::Winning.is_bout_complete(db, bout['id'])
     expect(status).to be_nil
     Rps::BoutsRepo.save(db, {'cont_choice' => 'cutter', 'id' => bout['id']})
-    result = Rps::Winning.bout_winner(db, bout['id'])
+    result = Rps::Winning.is_bout_complete(db, bout['id'])
     expect(result).to eq(user2['id'])
   end
   
