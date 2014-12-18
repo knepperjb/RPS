@@ -1,7 +1,4 @@
-## WIP - RUFINO
-
-#require 'spec_helper'
-#require 'pg'
+require 'spec_helper'
 
 
 describe Rps::UsersRepo do
@@ -16,54 +13,62 @@ describe Rps::UsersRepo do
     Rps.clear_db(db)
   end
 
-  xit "gets all users" do
-    db.exec("INSERT INTO users (name) VALUES ($1)", ["Alice"])
-    db.exec("INSERT INTO users (name) VALUES ($1)", ["Bob"])
+  it "gets all users" do
+    db.exec("INSERT INTO users (username, password) VALUES ($1, $2)", ["Alice", "pass123"])
+    db.exec("INSERT INTO users (username, password) VALUES ($1, $2)", ["Bob", "pass456"])
 
-    users = Library::UserRepo.all(db)
+    users = Rps::UsersRepo.all(db)
     expect(users).to be_a Array
     expect(users.count).to eq 2
 
-    names = users.map {|u| u['name'] }
+    names = users.map {|u| u["username"] }
     expect(names).to include "Alice", "Bob"
+
+    passwords = users.map {|u| u["password"] }
+    expect(passwords).to include "pass123", "pass456"
   end
 
-  xit "creates users" do
+  it "creates users" do
     expect(user_count(db)).to eq 0
 
-    user = Library::UserRepo.save(db, { 'name' => "Alice" })
-    expect(user['id']).to_not be_nil
-    expect(user['name']).to eq "Alice"
+    user = Rps::UsersRepo.save(db, { "username" => "Alice", "password" => "pass123" })
+    expect(user["id"]).to_not be_nil
+    expect(user["username"]).to eq "Alice"
+    expect(user["password"]).to eq "pass123"
 
     # Check for persistence
     expect(user_count(db)).to eq 1
 
     user = db.exec("SELECT * FROM users")[0]
-    expect(user['name']).to eq "Alice"
+    expect(user["username"]).to eq "Alice"
+    expect(user["password"]).to eq "pass123"
   end
 
-  xit "finds users" do
-    user = Library::UserRepo.save(db, { 'name' => "Alice" })
-    retrieved_user = Library::UserRepo.find(db, user['id'])
-    expect(retrieved_user['name']).to eq "Alice"
+  it "finds users" do
+    user = Rps::UsersRepo.save(db, { "username" => "Alice", "password" => "pass123" })
+    retrieved_user = Rps::UsersRepo.find(db, user["id"])
+    expect(retrieved_user["username"]).to eq "Alice"
+    expect(retrieved_user["password"]).to eq "pass123"
   end
 
-  xit "updates users" do
-    user1 = Library::UserRepo.save(db, { 'name' => "Alice" })
-    user2 = Library::UserRepo.save(db, { 'id' => user1['id'], 'name' => "Alicia" })
-    expect(user2['id']).to eq(user1['id'])
-    expect(user2['name']).to eq "Alicia"
+  it "updates users" do
+    user1 = Rps::UsersRepo.save(db, { "username" => "Alice", "password" => "pass123" })
+    user2 = Rps::UsersRepo.save(db, { "id" => user1["id"], "username" => "Charles" , "password" => "pass987" })
+    expect(user2["id"]).to eq(user1["id"])
+    expect(user2["username"]).to eq "Charles"
+    expect(user2["password"]).to eq "pass987"
 
     # Check for persistence
-    user3 = Library::UserRepo.find(db, user1['id'])
-    expect(user3['name']).to eq "Alicia"
+    user3 = Rps::UsersRepo.find(db, user1["id"])
+    expect(user3["username"]).to eq "Charles"
+    expect(user3["password"]).to eq "pass987"
   end
 
-  xit "destroys users" do
-    user = Library::UserRepo.save(db, { 'name' => "Alice" })
+  it "destroys users" do
+    user = Rps::UsersRepo.save(db, { "username" => "Alice", "password" => "pass123" })
     expect(user_count(db)).to eq 1
 
-    Library::UserRepo.destroy(db, user['id'])
+    Rps::UsersRepo.destroy(db, user["id"])
     expect(user_count(db)).to eq 0
   end
 end
