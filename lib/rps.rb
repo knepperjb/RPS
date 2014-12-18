@@ -5,6 +5,7 @@ require_relative "repos/api_key_repo.rb"
 require_relative "repos/match_repo.rb"
 require_relative "repos/users_repo.rb"
 require_relative "repos/bouts_repo.rb"
+require_relative 'rb/winning.rb'
 
 module Rps
 
