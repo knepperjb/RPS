@@ -44,7 +44,7 @@ module Rps
         chal_choice     VARCHAR,
         cont_choice     VARCHAR,
         winner          VARCHAR,
-        match_id         INTEGER
+        match_id        INTEGER REFERENCES matches(id) ON DELETE CASCADE
         );
       ]
   end
