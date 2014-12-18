@@ -27,7 +27,13 @@ describe Rps::ApiKeyRepo do
     expect(key['api_key']).to_not be_nil
   end
   
-
+  it 'selects an api key by user id' do
+    user = Rps::UsersRepo.save(db, { "username" => "Jamal", "password" => "pass123" })
+    key = Rps::ApiKeyRepo.add_api_key_to_table(db, user['id'])
+    result = Rps::ApiKeyRepo.find_key_by_user_id(db, user['id'])
+    expect(result['api_key']).to eq(key['api_key'])
+  end
+  
 end
 
   
