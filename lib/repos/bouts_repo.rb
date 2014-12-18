@@ -5,18 +5,18 @@ module Rps
       if bout_data['cont_choice']
         sql = %q[UPDATE bouts SET cont_choice = $1 WHERE id = $2 RETURNING *]
         result = db.exec(sql, [bout_data['cont_choice'], bout_data['id']])
-        puts result.entries
         result.entries.first
       else 
         sql = %q[INSERT INTO bouts (chal_choice, match_id)  VALUES ($1, $2) RETURNING *]
-        result = db.exec(sql, [bout_data[:chal_choice], bout_data[:match_id]])
+        result = db.exec(sql, [bout_data['chal_choice'], bout_data['match_id']])
         result.entries.first
       end
     end
 
-    def self.winner(db, bout_id, winner)
+    def self.winner(db, bout_data)
       sql = %q[UPDATE bouts SET winner = $2 WHERE id = $1 RETURNING *]
-      result = db.exec(sql, [bout_id, winner])
+      result = db.exec(sql, [bout_data['id'], bout_data['winner']])
+      puts result.entries.first
       result.entries.first
     end
 
