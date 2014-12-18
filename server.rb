@@ -12,7 +12,7 @@ require_relative 'lib/repos/users_repo.rb'
 require_relative 'lib/repos/bouts_repo.rb'
 
 
-class Rps::Server < Sinatra::Application
+#class Rps::Server < Sinatra::Application
 
   configure do
       enable :sessions
@@ -116,6 +116,6 @@ class Rps::Server < Sinatra::Application
     '{}'
   end
 
-end
+#end
 
 
