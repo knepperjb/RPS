@@ -43,7 +43,10 @@
 					<option>{{username}}</option>
 				</script>
 				<script id='getmatch-template' type='text/x-handlebars-template'>
-					<li>{{id}}</li>
+					<li><a class='match' id='{{id}}' href='#'>{{id}}</a></li>
+				</script>
+				<script id='bouthistory-template' type='text/x-handlebars-template'>
+					<li>{{id}}: {{chal_choice}} vs {{cont_choice}}, winner = {{winner}}</li>
 				</script>
 			</div>
 
@@ -75,6 +78,7 @@
 					</ul>
 				</div>
 			</div>
+			<ul id='#boutHistory'></ul>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/signUp.js"></script>
@@ -85,5 +89,6 @@
 	<script type='text/javascript' src='js/match-history.js'></script>
 
 	<script type='text/javascript' src="js/move.js"></script>
+	<script type='text/javascript' src="js/bouts.js"></script>
 </body>
 </html>
