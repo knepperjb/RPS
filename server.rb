@@ -91,18 +91,17 @@ require_relative 'lib/repos/bouts_repo.rb'
   post '/match' do
   # Access MATCHES table
   # Create a match between the challenger (challenger_id) and contender (contender_id)
-#   rufino
+    match = Rps::MatchRepo.create_match(db, challenger_id, contender_id)
   end
 
   post '/match' do
   # Access BOUTS table
-  # 
-#   melizza
+  # melizza
   end
 
-  post '/match/:match_id' do
+  get '/match/:match_id' do
   # Access BOUTS table to return history of match for challenger_id & contender_id
-#   melizza
+  #  melizza
   end
 
   get '/users' do
