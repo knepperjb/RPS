@@ -36,17 +36,12 @@
 
 				<h4>Users</h4>
 
-				<div style="overflow:scroll; height: 100px">
-					<ul>
-						<li>hi</li>
-						<li>ho</li>
-						<li>hee</li>
-						<li>hu</li>
-						<li>hum</li>
-						<li>hooray</li>
-						<!-- These will be appended with handlebars -->
-					</ul>
-				</div>
+				<!-- <div style="overflow:scroll; height: 100px">
+				</div> -->
+				<select id='users'></select>
+				<script id='getusers-template' type='text/x-handlebars-template'>
+					<option>{{username}}</option>
+				</script>
 			</div>
 
 			<div class="small-12 large-8 columns" id="middle">
@@ -65,7 +60,7 @@
 							<img src="http://www.pizzatools.com/content/PizzaTools/images/catimages/zoom/wheelcutter.jpg">
 							<input type="radio" name="radio" value="cutter">
 						</div>
-						<center><button type="submit">Submit</button></center>
+						<center><button id='moveBtn' type="submit">Submit</button></center>
 					</form>
 				</div>
 			</div>
@@ -87,5 +82,7 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="js/signUp.js"></script>
+	<script type="text/javascript" src="js/users.js"></script>
+	<script type='text/javascript' src='js/challenge.js'></script>
 </body>
 </html>

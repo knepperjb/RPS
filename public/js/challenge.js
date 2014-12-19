@@ -1,17 +1,17 @@
 function createChallenge() {
-	$('#challenge').change(function() {
+	$('#users').change(function() {
 		$.post(
-			"/challenge",
+			"/match",
 			{
-				challenger: $("username").val(),
-				contender:  $('#challenge').val(),
+				// challenger: $("username").val(),
+				contender:  $('#users').val(),
 				apiToken: sessionStorage.getItem("apiToken")
 			}
 		).success(function (bout) {
-			console.log("bout created", bout)
-		})
+			console.log("bout created", bout);
+		});
 
-	})
-});
+	});
+};
 
 createChallenge();

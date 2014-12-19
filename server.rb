@@ -20,7 +20,7 @@ require_relative 'lib/repos/bouts_repo.rb'
   end
 
   def db
-    Rps.create_db_connection('rps_test')  # Will be rps_dev when we go live  
+    Rps.create_db_connection('rps_dev')  # Will be rps_dev when we go live  
   end
 
   # run this before every endpoint to get the current user
@@ -103,8 +103,10 @@ require_relative 'lib/repos/bouts_repo.rb'
   end
 
   get '/users' do
+    headers['Content-Type'] = 'application/json'
   # Access USERS table to select (drop down box) the contender
     users = Rps::UsersRepo.all(db)  # returns an array of users 
+    JSON.generate(users)
   end
 
 

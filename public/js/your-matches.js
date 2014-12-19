@@ -1,3 +1,7 @@
+var source = $('#getmatch-template').html();
+var template = handlebars.compile(source);
+
+
 function yourMatches() {
 	$('#your-matches').click(function() {
 		$.ajax({
