@@ -1,10 +1,12 @@
+  
+
+function yourMatches() {
   var source = $('#getmatch-template').html();
   var template = Handlebars.compile(source);
   var token = sessionStorage.getItem("apiToken")
-  console.log(token)
-
-function yourMatches() {
-  		console.log('finding matches!!!!')
+  console.log(sessionStorage.getItem("apiToken"))
+  console.log("the api token is:" + token)
+  console.log('finding matches!!!!')
   		$.ajax({
   			type: "GET",
   			url: '/matches/' + token
@@ -18,12 +20,12 @@ function yourMatches() {
 	});
   };
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
-yourMatches();
-setInterval(yourMatches(), 7000);
+// yourMatches();
+// setInterval(yourMatches(), 7000);
 
-})
+// })
 
 
 
