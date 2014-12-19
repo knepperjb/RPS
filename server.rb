@@ -55,7 +55,7 @@ require_relative 'lib/repos/bouts_repo.rb'
         errors << 'blank_username'
       end
      
-      if Rps::UsersRepo.find_user_by_id(db, params[:username])
+      if Rps::UsersRepo.find_user_by_name(db, params[:username]).length > 0
         errors << 'username_taken'
       end
 
@@ -104,7 +104,7 @@ require_relative 'lib/repos/bouts_repo.rb'
   # Access BOUTS table
     bout_data = params
     Rps::BoutsRepo.save(db, params)
-    complete_bout = Rps::Winning.is_bout_complete(db,=[[]] params[:bout_id])
+    complete_bout = Rps::Winning.is_bout_complete(db, params[:bout_id])
     complete_match = Rps::Winning.is_match_complete(db, params[:match_id])
     if complete_bout
       Rps::UsersRepo.find_by_id(db,complete_bout)

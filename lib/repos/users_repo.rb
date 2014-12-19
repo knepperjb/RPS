@@ -9,8 +9,9 @@ module Rps
     end
 
     # Find user's (challenger/contender) USERNAME and PASSWORD by their associated ID
-    def self.find_user_by_id(db, user_id)
-      db.exec("SELECT username FROM users WHERE id = $1", [user_id])[0]
+    def self.find_user_by_name(db, user_name)
+      result = db.exec("SELECT username FROM users WHERE username = $1", [user_name])
+      result.entries
     end
 
 
@@ -20,7 +21,7 @@ module Rps
       if user_data["id"]
         db.exec("UPDATE users SET username = $1, password = $2 WHERE id = $3 RETURNING *", [user_data["username"], user_data["password"], user_data["id"]])[0]    
       else 
-        db.exec("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *", [user_data["username"], user_data["password"]])[0]
+        db.exec("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *", [user_data[:username], user_data[:password]])[0]
       end
     end
 

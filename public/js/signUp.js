@@ -1,6 +1,8 @@
 function ajaxSignup () {
   $("#signupBtn").click(function() {
     console.log("in signup")
+    console.log($("#usernameSignup").val());
+    console.log($("#passwordSignup").val())
     $.post(
       "/signup",
       {
