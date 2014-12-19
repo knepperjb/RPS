@@ -100,10 +100,10 @@ require_relative 'lib/repos/bouts_repo.rb'
     contenders.to_json
   end
   
-  get '/matches/:id' do
+  get '/match/:id' do
     #grabs all the current matches for a user
-    user_id = 
-    JSON.generate(Rps::MatchRepo.find_matches_by_player(db, user_id))
+    JSON.generate(Rps::BoutsRepo.find_by_match_id(db, params[:id]))
+
   end
 
   post '/matches/:match_id' do

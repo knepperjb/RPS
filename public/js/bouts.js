@@ -3,19 +3,21 @@ var template = Handlebars.compile(source);
 
 
 
-$('.match').on('click', function (e) {
+$(document).on('click', '.match', function (e) {
+	console.log("hi there")
 	var matchId = e.currentTarget.id;
 	console.log(e.currentTarget);
-	alert(matchId);
-	// $.ajax({
-	// 	type: "GET",
-	// 	url: "/matches/" + matchId
-	// }).success(function (bouts) {
-	// 	console.log(bouts);
-	// 	bouts.forEach(function (bout) {
-	// 		var boutsHtml = template(bout);	
-	// 	});
-	// 	$('#boutHistory').append(boutsHtml);
+	$.ajax({
+		type: "GET",
+		url: "/match/" + matchId
+	}).success(function (bouts) {
+		bouts = JSON.parse(bouts)
+		console.log(bouts);
+		bouts.forEach(function (bout) {
+			console.log(bout)
+			var boutsHtml = template(bout);	
+		});
+		$('#boutHistory').append(boutsHtml);
 
-	// });
+	});
 });
