@@ -93,15 +93,31 @@ require_relative 'lib/repos/bouts_repo.rb'
   # Create a match between the challenger (challenger_id) and contender (contender_id)
     match = Rps::MatchRepo.create_match(db, challenger_id, contender_id)
   end
+  
+  get ':user_id/matches' do
+    #grabs all the current matches for a user
+    user_id = params[:id]
+    JSON.generate(Rps::MatchRepo.find_matches_by_player(db, user_id))
+  end
 
-  post '/match' do
+  post '/match/:match_id' do
   # Access BOUTS table
-  # melizza
+    bout_data = params
+    Rps::BoutsRepo.save(db, params)
+    complete_bout = Rps::Winning.is_bout_complete(db,=[[]] params[:bout_id])
+    complete_match = Rps::Winning.is_match_complete(db, params[:match_id])
+    if complete_bout
+      Rps::UsersRepo.find_by_id(db,complete_bout)
+      if complete_match
+        Rps::UsersRepo.find_by_id(db,complete_match)
+      end
+    end
   end
 
   get '/match/:match_id' do
   # Access BOUTS table to return history of match for challenger_id & contender_id
-  #  melizza
+    bout_history = Rps::BoutsRepo.find_by_match_id(db, params[:match_id])
+   JSON.generate(bout_history)
   end
 
   get '/users' do
