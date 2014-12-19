@@ -88,19 +88,25 @@ require_relative 'lib/repos/bouts_repo.rb'
 
   end
 
-  post '/match' do
+  post '/matches' do
   # Access MATCHES table
   # Create a match between the challenger (challenger_id) and contender (contender_id)
     match = Rps::MatchRepo.create_match(db, challenger_id, contender_id)
   end
   
-  get ':user_id/matches' do
+  get '/matches/:token' do
+    user_data = Rps::ApiKeyRepo.find_by_api_key(db, params[:token])
+    contenders = Rps::MatchRepo.find_by_player(db, user_data['user_id'])
+    contenders
+  end
+  
+  get '/matches/:id' do
     #grabs all the current matches for a user
-    user_id = params[:id]
+    user_id = 
     JSON.generate(Rps::MatchRepo.find_matches_by_player(db, user_id))
   end
 
-  post '/match/:match_id' do
+  post '/matches/:match_id' do
   # Access BOUTS table
     bout_data = params
     Rps::BoutsRepo.save(db, params)
@@ -114,7 +120,7 @@ require_relative 'lib/repos/bouts_repo.rb'
     end
   end
 
-  get '/match/:match_id' do
+  get '/matches/:match_id' do
   # Access BOUTS table to return history of match for challenger_id & contender_id
     bout_history = Rps::BoutsRepo.find_by_match_id(db, params[:match_id])
    JSON.generate(bout_history)

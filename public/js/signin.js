@@ -9,7 +9,7 @@ function ajaxSignin() {
      }
    ).success(function (token) {
      console.log("signin success", token)
-     sessionStorage.setItem("apiToken", token)
+     sessionStorage.setItem("apiToken", token['apiToken'])
      // inform user of successful signup, hide and clear inputs.
      alert($("#usernameSignin").val() + " successfully signed in.");
      $(".signinContainer").hide();
