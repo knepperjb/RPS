@@ -81,7 +81,7 @@ require_relative 'lib/repos/bouts_repo.rb'
 
     if user && user[0]['password'] == params[:password]
       token = Rps::ApiKeyRepo.add_api_key_to_table(db, user[0]['id'])
-      { apiToken: token["api_key"] }.to_json
+      { apiToken: token["api_key"], user_id: user[0]['id'] }.to_json
     else
       status 401
     end
