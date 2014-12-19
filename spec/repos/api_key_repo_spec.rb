@@ -14,7 +14,6 @@ describe Rps::ApiKeyRepo do
   
   it 'generates an api key' do
      api_key = Rps::ApiKeyRepo.generate_api_key
-     puts api_key
      expect(api_key).to_not be_nil
   end
   

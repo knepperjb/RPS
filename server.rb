@@ -55,13 +55,14 @@ require_relative 'lib/repos/bouts_repo.rb'
         errors << 'blank_username'
       end
      
-      if Rps::UsersRepo.find_user_by_name(db, params[:username])
+      if Rps::UsersRepo.find_user_by_id(db, params[:username])
         errors << 'username_taken'
       end
 
       if errors.count == 0
         user_data = {username: params[:username], password: params[:password]}
         user = Rps::UsersRepo.save(db, user_data)
+#         look into api token instead of id
         session[:user_id] = user['id']
         status 200
         '{}'
@@ -76,7 +77,7 @@ require_relative 'lib/repos/bouts_repo.rb'
   post '/signin' do
   # Access USERS table confirm user
   # Access API_KEYS table to insert API Token
-  user = Rps::UsersRepo.find_by_user_name(db, params[:username])
+  user = Rps::UsersRepo.find_by_user_id(db, params[:username])
 
     if user && user['password'] == params[:password]
       token = Rps::ApiKeyRepo.add_api_key_to_table(db, user['id'])
@@ -90,16 +91,18 @@ require_relative 'lib/repos/bouts_repo.rb'
   post '/match' do
   # Access MATCHES table
   # Create a match between the challenger (challenger_id) and contender (contender_id)
+#   rufino
   end
 
-  post '/match/:user_id' do
+  post '/match' do
   # Access BOUTS table
   # 
-
+#   melizza
   end
 
-  post '/match/:user_id/history' do
+  post '/match/:match_id' do
   # Access BOUTS table to return history of match for challenger_id & contender_id
+#   melizza
   end
 
   get '/users' do
