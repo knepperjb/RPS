@@ -96,8 +96,8 @@ require_relative 'lib/repos/bouts_repo.rb'
   
   get '/matches/:token' do
     user_data = Rps::ApiKeyRepo.find_by_api_key(db, params[:token])
-    contenders = Rps::MatchRepo.find_by_player(db, user_data['user_id'])
-    contenders
+    contenders = Rps::MatchRepo.find_matches_by_player(db, user_data['user_id'])
+    contenders.to_json
   end
   
   get '/matches/:id' do

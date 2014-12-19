@@ -11,8 +11,9 @@ function yourMatches() {
   			type: "GET",
   			url: '/matches/' + token
   		}).success(function (data) {
+        data = JSON.parse(data)
   		  console.log(data);
-  			data.forEach(function (user){
+  			data.forEach(function(user){
   			// handlebars:
   			var yourMatchesHtml = template(user);
   			$('#currentmatches').append(yourMatchesHtml);
