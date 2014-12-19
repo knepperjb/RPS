@@ -1,13 +1,10 @@
-$(document).ready(function() {
-    setInterval("yourMatches", 7000);
-});
-
   var source = $('#getmatch-template').html();
-  var template = handlebars.compile(source);
-  var token = sessionStorage.getItem('apiToken')
-  
-  function yourMatches() {
-  
+  var template = Handlebars.compile(source);
+  var token = sessionStorage.getItem("apiToken")
+  console.log(token)
+
+function yourMatches() {
+  		console.log('finding matches!!!!')
   		$.ajax({
   			type: "GET",
   			url: '/matches/' + token
@@ -18,7 +15,16 @@ $(document).ready(function() {
   			var yourMatchesHtml = template(user);
   			$('#currentmatches').append(yourMatchesHtml);
   		});
-});
+	});
+  };
+
+$(document).ready(function() {
 
 yourMatches();
+setInterval(yourMatches(), 7000);
+
+})
+
+
+
 
