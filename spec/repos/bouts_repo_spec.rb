@@ -63,7 +63,33 @@ describe Rps::BoutsRepo do
     match = Rps::MatchRepo.create_match(db, user1['id'], user2['id'])
     bout = Rps::BoutsRepo.save(db, {'chal_choice' => 'pizza', 'match_id' => match['id']})
     result = Rps::BoutsRepo.find_by_match_id(db, match['id'])
-    expect(result['id']).to eq(bout['id'])
+    expect(result.first['id']).to eq(bout['id'])
+    expect(result).to be_a Array
+  end
+  
+  it 'finds the number of wins per user' do
+    user1 = Rps::UsersRepo.save(db, { "username" => "Alice", "password" => "pass123" })
+    user2 = Rps::UsersRepo.save(db, { "username" => "Jamie", "password" => "pass123" })
+    match = Rps::MatchRepo.create_match(db, user1['id'], user2['id'])
+    bout1 = Rps::BoutsRepo.save(db, {'chal_choice' => 'pizza', 'match_id' => match['id']})
+    Rps::BoutsRepo.save(db, {'cont_choice' => 'cutter', 'id' => bout1['id']})
+    Rps::Winning.is_bout_complete(db, bout1['id'])
+    
+    bout2 = Rps::BoutsRepo.save(db, {'chal_choice' => 'pizza', 'match_id' => match['id']})
+    Rps::BoutsRepo.save(db, {'cont_choice' => 'pan', 'id' => bout2['id']})
+    Rps::Winning.is_bout_complete(db, bout2['id'])
+    
+    bout3 = Rps::BoutsRepo.save(db, {'chal_choice' => 'pizza', 'match_id' => match['id']})
+    Rps::BoutsRepo.save(db, {'cont_choice' => 'pizza', 'id' => bout3['id']})
+    result = Rps::Winning.is_bout_complete(db, bout3['id'])
+    
+    bout4 = Rps::BoutsRepo.save(db, {'chal_choice' => 'pizza', 'match_id' => match['id']})
+    Rps::BoutsRepo.save(db, {'cont_choice' => 'cutter', 'id' => bout4['id']})
+    result = Rps::Winning.is_bout_complete(db, bout4['id'])
+    
+    result = Rps::BoutsRepo.winner_count(db, match['id'])
+    expect(result).to be_a Array
+    
   end
     
 end
