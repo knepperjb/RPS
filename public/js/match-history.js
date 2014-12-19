@@ -9,7 +9,7 @@ function matchHistory() {
 	var x = 
 	$.ajax({
 		type: "GET",
-		url: "/match/" + x
+		url: "/matches/" + x
 	}).success(function (data) {
 		data.forEach(function (x) {
 			console.log(x['id'])

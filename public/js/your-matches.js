@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    setInterval("yourMatches()", 7000);
+    setInterval("yourMatches", 7000);
+});
 
   var source = $('#getmatch-template').html();
   var template = handlebars.compile(source);
@@ -12,12 +13,12 @@ $(document).ready(function() {
   			url: '/matches/' + token
   		}).success(function (data) {
   		  console.log(data);
-  			data.forEach(function (user))
+  			data.forEach(function (user){
   			// handlebars:
-  			var yourMatchesHtml = template();
+  			var yourMatchesHtml = template(user);
   			$('#currentmatches').append(yourMatchesHtml);
   		});
-};
+});
 
 yourMatches();
 
