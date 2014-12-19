@@ -42,6 +42,9 @@
 				<script id='getusers-template' type='text/x-handlebars-template'>
 					<option>{{username}}</option>
 				</script>
+				<script id='getmatch-template' type='text/x-handlebars-template'>
+					<li>{{id}}</li>
+				</script>
 			</div>
 
 			<div class="small-12 large-8 columns" id="middle">
@@ -68,14 +71,7 @@
 			<div class="small-6 large-2 columns" id="right-bar">
 			<h4> My Matches </h4>
 				<div id="currentmatches" style="overflow:scroll; height: 500px">
-					<ul>
-						<li>hi</li>
-						<li>hi</li>
-						<li>ho</li>
-						<li>hee</li>
-						<li>hu</li>
-						<li>hum</li>
-						<li>hooray</li>
+					<ul id='mymatches'>
 					</ul>
 				</div>
 			</div>
@@ -85,5 +81,6 @@
 	<script type="text/javascript" src="js/users.js"></script>
 	<script type='text/javascript' src='js/challenge.js'></script>
 	<script type='text/javascript' src='js/signin.js'></script>
+	<script type='text/javascript' src='js/match-history.js'></script>
 </body>
 </html>

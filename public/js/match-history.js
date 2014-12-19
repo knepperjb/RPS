@@ -2,18 +2,22 @@ $(document).ready(function() {
 	setInterval("matchHistory", 7000);
 });
 
-var source = $('#gethistory-template').html();
+var source = $('#getmatch-template').html();
 var template = Handlebars.compile(source);
 
 function matchHistory() {
+	var x = 
 	$.ajax({
 		type: "GET",
-		url: "/match-history"
+		url: "/match/" + x
 	}).success(function (data) {
-		console.log(data);
+		data.forEach(function (x) {
+			console.log(x['id'])
+			var historyHtml = template(x['id']);
+		});
 		//handlebars shit goes here.
-		var historyHtml = template(data);
-		$('#history').append(historyHtml);
+		
+		$('#mymatches').append(historyHtml);
 	});
 };
 
