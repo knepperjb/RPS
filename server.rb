@@ -81,22 +81,28 @@ require_relative 'lib/repos/bouts_repo.rb'
 
     if user && user[0]['password'] == params[:password]
       token = Rps::ApiKeyRepo.add_api_key_to_table(db, user[0]['id'])
-      { apiToken: token["api_key"], user_id: user[0]['id'] }.to_json
+      { apiToken: token["api_key"] }.to_json
     else
       status 401
     end
 
   end
 
-  post '/match' do
+  post '/matches' do
   # Access MATCHES table
   # Create a match between the challenger (challenger_id) and contender (contender_id)
     match = Rps::MatchRepo.create_match(db, challenger_id, contender_id)
   end
   
-  get ':user_id/matches' do
+  get '/matches/:token' do
+    user_data = Rps::ApiKeyRepo.find_by_api_key(db, params[:token])
+    contenders = Rps::MatchRepo.find_by_player(db, user_data['user_id'])
+    contenders
+  end
+  
+  get '/matches/:id' do
     #grabs all the current matches for a user
-    user_id = params[:id]
+    user_id = 
     JSON.generate(Rps::MatchRepo.find_matches_by_player(db, user_id))
   end
 

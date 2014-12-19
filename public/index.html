@@ -68,14 +68,18 @@
 			<div class="small-6 large-2 columns" id="right-bar">
 			<h4> My Matches </h4>
 				<div id="currentmatches" style="overflow:scroll; height: 500px">
-					<ul>
-						<li>hi</li>
+				<ul>
+				<script id='getmatch-template' type="text/x-handlebars-template">
+						<li><a>{{data}}</a></li>
+				</script>
+<!--
 						<li>hi</li>
 						<li>ho</li>
 						<li>hee</li>
 						<li>hu</li>
 						<li>hum</li>
 						<li>hooray</li>
+-->
 					</ul>
 				</div>
 			</div>
@@ -85,5 +89,6 @@
 	<script type="text/javascript" src="js/users.js"></script>
 	<script type='text/javascript' src='js/challenge.js'></script>
 	<script type='text/javascript' src='js/signin.js'></script>
+	<script type="text/javascript" src="js/your-matches.js"</script>
 </body>
 </html>
