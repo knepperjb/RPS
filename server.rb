@@ -79,8 +79,8 @@ require_relative 'lib/repos/bouts_repo.rb'
   # Access API_KEYS table to insert API Token
   user = Rps::UsersRepo.find_user_by_name(db, params[:username])
 
-    if user && user['password'] == params[:password]
-      token = Rps::ApiKeyRepo.add_api_key_to_table(db, user['id'])
+    if user && user[0]['password'] == params[:password]
+      token = Rps::ApiKeyRepo.add_api_key_to_table(db, user[0]['id'])
       { apiToken: token["api_key"] }.to_json
     else
       status 401

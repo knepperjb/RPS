@@ -10,7 +10,7 @@ module Rps
 
     # Find user's (challenger/contender) USERNAME and PASSWORD by their associated ID
     def self.find_user_by_name(db, user_name)
-      result = db.exec("SELECT username FROM users WHERE username = $1", [user_name])
+      result = db.exec("SELECT * FROM users WHERE username = $1", [user_name])
       result.entries
     end
 
